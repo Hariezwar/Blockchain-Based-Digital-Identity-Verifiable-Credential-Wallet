@@ -27,6 +27,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
+      - name: Fix absolute paths for GitHub Pages
+        run: |
+          find ./frontend -type f -name "*.html" -o -name "*.js" -o -name "*.json" | xargs sed -i 's|"/assets|"./assets|g'
+          find ./frontend -type f -name "*.html" -o -name "*.js" -o -name "*.json" | xargs sed -i 's|"/html|"./html|g'
+          find ./frontend -type f -name "*.html" -o -name "*.js" -o -name "*.json" | xargs sed -i "s|'/html|'./html|g"
+          find ./frontend -type f -name "*.html" -o -name "*.js" -o -name "*.json" | xargs sed -i 's|"/manifest.json|"./manifest.json|g'
+          find ./frontend -type f -name "*.html" -o -name "*.js" -o -name "*.json" | xargs sed -i 's|"/service-worker.js|"./service-worker.js|g'
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
