@@ -161,24 +161,6 @@ It helps users to:
 
 ---
 
-## 🛡️ Benefits
-
-- 🔒 Improved identity security
-
-- ✅ Fast and reliable credential verification
-
-- ⛓️ Tamper-resistant records
-
-- 👤 Greater user control over identity
-
-- 📉 Reduced manual verification effort
-
-- 🌐 Supports trusted digital credential exchange
-
-- 🚀 Scalable for multiple institutions and organizations
-
----
-
 ## 🚀 Future Enhancements
 
 - Integration with Decentralized Identifiers (DIDs)
