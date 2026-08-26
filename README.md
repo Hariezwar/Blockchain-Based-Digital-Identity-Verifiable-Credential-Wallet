@@ -62,75 +62,75 @@ It helps users to:
 
 ## 👤 Digital Identity Management
 
-Create and manage a decentralized digital identity
+- Create and manage a decentralized digital identity
 
-Secure identity profile management
+- Secure identity profile management
 
-Unique identity identifier for each user
+- Unique identity identifier for each user
 
-User-controlled credential sharing
+- User-controlled credential sharing
 
 ## 🎓 Verifiable Credential Wallet
 
-Store digital certificates and credentials
+- Store digital certificates and credentials
 
-Organize credentials in a single wallet
+- Organize credentials in a single wallet
 
-View credential issuer and verification details
+- View credential issuer and verification details
 
-Track issued and shared credentials
+- Track issued and shared credentials
 
 ## ⛓️ Blockchain-Based Verification
 
-Store credential verification records on blockchain
+- Store credential verification records on blockchain
 
-Tamper-resistant credential validation
+- Tamper-resistant credential validation
 
-Generate unique credential hashes
+- Generate unique credential hashes
 
-Verify whether a credential is authentic and valid
+- Verify whether a credential is authentic and valid
 
 ## 🏢 Issuer Management
 
-Authorized institutions can issue credentials
+- Authorized institutions can issue credentials
 
-Digital certificates can be issued directly to users
+- Digital certificates can be issued directly to users
 
-Issuers can maintain credential records
+- Issuers can maintain credential records
 
-Credential status can be monitored and updated
+- Credential status can be monitored and updated
 
 ## 🔎 Credential Verification
 
-Organizations can verify credentials instantly
+- Organizations can verify credentials instantly
 
-QR code or verification ID based validation
+- QR code or verification ID based validation
 
-Check credential authenticity without lengthy manual processes
+- Check credential authenticity without lengthy manual processes
 
-Identify revoked or invalid credentials
+- Identify revoked or invalid credentials
 
 ## 🔐 Security & Privacy
 
-Secure authentication and authorization
+- Secure authentication and authorization
 
-User-controlled data sharing
+- User-controlled data sharing
 
-Cryptographic protection of credentials
+- Cryptographic protection of credentials
 
-Minimize unnecessary exposure of personal information
+- Minimize unnecessary exposure of personal information
 
 ## 📊 Management Dashboard
 
-Monitor issued credentials
+- Monitor issued credentials
 
-View verification activities
+- View verification activities
 
-Track credential status
+- Track credential status
 
-Manage users, issuers, and verification requests
+- Manage users, issuers, and verification requests
 
-Generate verification and activity reports
+- Generate verification and activity reports
 
 ## 🔄 How the System Works
 
