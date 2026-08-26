@@ -132,21 +132,7 @@ It helps users to:
 
 - Generate verification and activity reports
 
-## 🌍 Real-World Applications
-
-🎓 Educational Certificates – Degree and course certificate verification
-
-💼 Employment Verification – Employee qualifications and experience
-
-🏛️ Government Services – Digital identity and official credentials
-
-🏥 Healthcare – Verified professional and patient credentials
-
-🪪 Digital Identity – Secure identity management
-
-📜 Professional Certifications – Skill and certification verification
-
-🌐 Cross-Organization Verification – Trusted credential exchange
+---
 
 ## 🏗️ System Architecture
 
@@ -173,6 +159,7 @@ It helps users to:
            │ Company / Institution│
            └─────────────────────┘
 
+---
 
 ## 🛡️ Benefits
 
@@ -189,6 +176,8 @@ It helps users to:
 - 🌐 Supports trusted digital credential exchange
 
 - 🚀 Scalable for multiple institutions and organizations
+
+---
 
 ## 🚀 Future Enhancements
 
