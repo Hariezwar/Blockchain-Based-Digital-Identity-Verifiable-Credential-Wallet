@@ -132,12 +132,6 @@ It helps users to:
 
 - Generate verification and activity reports
 
-## 🔄 How the System Works
-
-1. User Registration → 2. Digital Identity Creation → 3. Credential Issuing → 4. Blockchain Verification → 5. Credential Storage → 6. Secure Credential Sharing → 7. Instant Verification
-
-The user receives credentials from a trusted issuer and stores them in the digital wallet. When a verifier requests proof, the user can selectively share the required credential. The verifier can then validate its authenticity using the blockchain-backed verification mechanism.
-
 ## 🌍 Real-World Applications
 
 🎓 Educational Certificates – Degree and course certificate verification
