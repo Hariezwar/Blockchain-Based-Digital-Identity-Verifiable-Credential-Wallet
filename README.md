@@ -10,7 +10,7 @@ The system uses blockchain technology to provide trust, transparency, and tamper
 
 Our vision is simple:
 
-**“Own Your Identity. Verify with Trust. Share with Confidence.”**
+**"Own Your Identity. Verify with Trust. Share with Confidence."**
 
 ---
 
@@ -212,3 +212,15 @@ Integration with universities, companies, and government systems
 
 Advanced privacy-preserving verification using zero-knowledge proofs
 
+---
+
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+Hariezwar U
