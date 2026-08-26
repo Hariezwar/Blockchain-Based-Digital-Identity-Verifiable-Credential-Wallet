@@ -182,35 +182,35 @@ The user receives credentials from a trusted issuer and stores them in the digit
 
 ## 🛡️ Benefits
 
-🔒 Improved identity security
+- 🔒 Improved identity security
 
-✅ Fast and reliable credential verification
+- ✅ Fast and reliable credential verification
 
-⛓️ Tamper-resistant records
+- ⛓️ Tamper-resistant records
 
-👤 Greater user control over identity
+- 👤 Greater user control over identity
 
-📉 Reduced manual verification effort
+- 📉 Reduced manual verification effort
 
-🌐 Supports trusted digital credential exchange
+- 🌐 Supports trusted digital credential exchange
 
-🚀 Scalable for multiple institutions and organizations
+- 🚀 Scalable for multiple institutions and organizations
 
 ## 🚀 Future Enhancements
 
-Integration with Decentralized Identifiers (DIDs)
+- Integration with Decentralized Identifiers (DIDs)
 
-Mobile application for Android and iOS
+- Mobile application for Android and iOS
 
-Biometric-based identity verification
+- Biometric-based identity verification
 
-Multi-blockchain support
+- Multi-blockchain support
 
-AI-assisted fraud and credential detection
+- AI-assisted fraud and credential detection
 
-Integration with universities, companies, and government systems
+- Integration with universities, companies, and government systems
 
-Advanced privacy-preserving verification using zero-knowledge proofs
+- Advanced privacy-preserving verification using zero-knowledge proofs
 
 ---
 
