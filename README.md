@@ -1,397 +1,231 @@
-#🔐 Blockchain-Based Digital Identity & Verifiable Credential Wallet
-
-A secure, decentralized digital identity platform that enables users to create and manage decentralized identities (DIDs), receive and store verifiable credentials, and securely share proof of identity without relying on centralized identity databases.
-
-##🌐 Overview
-
-The **Blockchain-Based Digital Identity & Verifiable Credential Wallet** is a web-based application designed around the principles of **Decentralized Identity (DID)** and **Verifiable Credentials (VCs)**.
-
-The platform provides separate workflows for:
-
-* 👤 **Holders** – Manage their decentralized identity and credentials.
-* 🏛️ **Issuers** – Issue digitally signed verifiable credentials.
-* ✅ **Verifiers** – Verify the authenticity and validity of credentials.
-* 🔗 **Blockchain/DID Layer** – Provides tamper-evident identity and credential verification mechanisms.
-
-The goal is to give individuals greater ownership and control over their digital identity while allowing organizations to issue and verify trusted credentials efficiently.
-
-## ✨ Key Features
-
-### 👤 Digital Identity Management
-
-* Create and manage a decentralized identity.
-* Generate and display a unique **DID (Decentralized Identifier)**.
-* View DID details from the user's profile.
-* Manage personal profile information.
-* Secure authentication and role-based access.
-
-### 🎓 Verifiable Credential Wallet
-
-* Receive credentials from authorized issuers.
-* Store credentials securely inside the wallet.
-* View credential details, issuer information, issue date, and status.
-* Track active, expired, revoked, and pending credentials.
-* Organize credentials through a user-friendly dashboard.
-
-### 🏛️ Credential Issuance
-
-Issuers can:
-
-* Register and authenticate securely.
-* View eligible credential requests.
-* Create and issue digitally signed credentials.
-* Specify credential type, subject, validity period, and metadata.
-* Revoke credentials when necessary.
-* Maintain an issuance history.
-
-### ✅ Credential Verification
-
-Verifiers can:
-
-* Enter or scan credential information.
-* Verify the credential's authenticity.
-* Validate the issuer.
-* Check credential expiration.
-* Check revocation status.
-* Compare the credential subject with the presented DID.
-* Display a clear **Verified / Invalid / Expired / Revoked** result.
-
-### 🔗 Blockchain & DID Integration
-
-* DID-based identity representation.
-* Tamper-evident credential records.
-* Credential verification using cryptographic proof concepts.
-* Blockchain-ready architecture for decentralized trust.
-* Separation of identity ownership from centralized application accounts.
-
-### 🛡️ Security
-
-* Secure authentication.
-* Role-based authorization.
-* Password hashing.
-* Protected API routes.
-* Digital signature verification concepts.
-* Credential status and revocation checking.
-* Input validation and error handling.
-
-## 🔄 System Workflow
-
-```text
-                    ┌─────────────────┐
-                    │      Holder     │
-                    │                 │
-                    │ Creates / Owns  │
-                    │       DID       │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │     Issuer      │
-                    │                 │
-                    │ Issues Verifiable│
-                    │    Credential   │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │ Digital Wallet  │
-                    │                 │
-                    │ Stores Credential│
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │     Verifier    │
-                    │                 │
-                    │ Verifies DID +  │
-                    │   Credential    │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │ Verification    │
-                    │     Result      │
-                    │                 │
-                    │ Valid / Invalid │
-                    │ Expired / Revoked│
-                    └─────────────────┘
-```
-
-## 🧩 User Roles
-
-| Role              | Responsibilities                                                               |
-| ----------------- | ------------------------------------------------------------------------------ |
-| **Holder**        | Creates/manages DID, receives credentials, stores credentials and shares proof |
-| **Issuer**        | Validates requests, issues credentials, manages credential lifecycle           |
-| **Verifier**      | Requests and verifies credentials and their authenticity                       |
-| **Administrator** | Manages platform configuration, users, roles and system monitoring             |
-
-## 🏗️ Technology Stack
-
-### Frontend
-
-* HTML5
-* CSS3
-* JavaScript
-* Responsive UI
-* Dashboard-based interface
-
-### Backend
-
-* Node.js
-* Express.js
-* REST APIs
-* Authentication and authorization middleware
-
-### Database
-
-* MongoDB / MongoDB Atlas
-* User records
-* DID information
-* Credential metadata
-* Issuance and verification records
-* Revocation/status information
-
-### Identity & Blockchain Concepts
-
-* Decentralized Identifiers (DIDs)
-* Verifiable Credentials (VCs)
-* Public/private key concepts
-* Cryptographic signatures
-* Blockchain-based trust and integrity
-
-## 📁 Project Structure
-
-```text
-Blockchain-Digital-Identity-Wallet/
-│
-├── frontend/
-│   ├── index.html
-│   ├── login.html
-│   ├── dashboard.html
-│   ├── profile.html
-│   ├── credentials.html
-│   ├── verify.html
-│   ├── issuer.html
-│   ├── verifier.html
-│   ├── css/
-│   └── js/
-│
-├── backend/
-│   ├── server.js
-│   ├── routes/
-│   ├── controllers/
-│   ├── models/
-│   ├── middleware/
-│   └── services/
-│
-├── database/
-│   └── seed/
-│
-├── docs/
-│
-├── .env.example
-├── package.json
-└── README.md
-```
-
-## 🔑 Example Credential
-
-```json
-{
-  "id": "urn:uuid:credential-001",
-  "type": [
-    "VerifiableCredential",
-    "UniversityDegreeCredential"
-  ],
-  "issuer": {
-    "id": "did:example:university123",
-    "name": "Example University"
-  },
-  "credentialSubject": {
-    "id": "did:example:holder456",
-    "name": "Student Name",
-    "degree": "B.Tech Computer Science"
-  },
-  "issuanceDate": "2026-08-01",
-  "expirationDate": "2030-08-01",
-  "status": "active"
-}
-```
-
-## 🔄 Credential Lifecycle
-
-```text
-Request
-   ↓
-Issuer Review
-   ↓
-Credential Creation
-   ↓
-Digital Signing
-   ↓
-Credential Issued
-   ↓
-Holder Wallet
-   ↓
-Credential Presentation
-   ↓
-Verifier Validation
-   ↓
-Verified
-   ↓
-Possible Revocation / Expiration
-```
-
-## 🧪 Verification Process
-
-When a credential is presented, the system checks:
-
-1. Credential format and required fields.
-2. Issuer identity.
-3. Credential subject DID.
-4. Digital signature/proof.
-5. Issue date and expiration date.
-6. Credential status.
-7. Revocation status.
-8. Integrity of the credential data.
-
-The verifier receives an easy-to-understand result such as:
-
-```text
-✅ CREDENTIAL VERIFIED
-
-Issuer: Example University
-Holder DID: did:example:holder456
-Credential: University Degree
-Status: Active
-Issued: 01 Aug 2026
-Expires: 01 Aug 2030
-```
-
-## 🎯 Objectives
-
-* Provide users with ownership of their digital identity.
-* Reduce dependence on centralized identity providers.
-* Enable secure and portable digital credentials.
-* Prevent unauthorized modification of credentials.
-* Simplify credential verification.
-* Support realistic issuer–holder–verifier workflows.
-* Demonstrate practical applications of blockchain and decentralized identity technology.
-
-## 🌍 Real-World Applications
-
-This project can be adapted for:
-
-* 🎓 University degree and academic certificates
-* 💼 Employment and professional credentials
-* 🪪 Digital identity verification
-* 🏥 Healthcare credentials
-* 🏦 KYC and financial onboarding
-* 🏢 Employee identity systems
-* 🚗 Digital driving credentials
-* 📜 Training and certification verification
-* 🌐 Cross-platform identity management
-
-## 🚀 Future Enhancements
-
-* Integration with a real blockchain network.
-* Support for standards such as W3C DID and Verifiable Credentials.
-* Wallet-to-wallet credential exchange.
-* QR-code based credential presentation.
-* Selective disclosure and privacy-preserving verification.
-* Zero-knowledge proof integration.
-* Hardware wallet support.
-* Mobile application.
-* Multi-chain identity support.
-* Decentralized revocation/status registries.
-
-## ⚙️ Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/Blockchain-Digital-Identity-Wallet.git
-cd Blockchain-Digital-Identity-Wallet
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Configure environment variables
-
-Create a `.env` file:
-
-```env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_secure_secret
-```
-
-### 4. Start the backend
-
-```bash
-npm start
-```
-
-### 5. Open the frontend
-
-Open the frontend through the configured development server or browser.
-
-## 🧑‍💻 Demo Roles
-
-For demonstration purposes, the application can provide separate accounts for:
-
-```text
-Holder
-Issuer
-Verifier
-Administrator
-```
-
-Each role should have access only to the workflows and actions appropriate to that role.
-
-## 📌 Project Highlights
-
-* Decentralized Identity
-* Blockchain Technology
-* Verifiable Credentials
-* Digital Wallet
-* Cryptographic Verification
-* Role-Based Access Control
-* Secure Authentication
-* Credential Lifecycle Management
-* Tamper-Evident Data
-* Issuer–Holder–Verifier Architecture
-
-## 🤝 Contributing
-
-Contributions, suggestions, and improvements are welcome.
-
-```bash
-git checkout -b feature/new-feature
-git commit -m "Add new feature"
-git push origin feature/new-feature
-```
-
-Create a Pull Request with a clear description of the proposed changes.
-
-## 📄 License
-
-This project is intended for educational, research, and demonstration purposes. Add an appropriate open-source license such as MIT before publishing the project for external contributions.
-
-## 👨‍💻 Author
-
-**HARIEZWAR U.**
-
-B.Tech – Computer Science and Business Systems
-V.S.B Engineering College
-
----
-
-⭐ **If you find this project useful, consider giving the repository a star!**
-
-> **"Own your identity. Control your credentials. Verify with confidence."**
+🔐 Blockchain-Based Digital Identity & Verifiable Credential Wallet
+
+Secure, decentralized, and user-controlled digital identity through blockchain technology.
+
+🌐 About the Project
+
+The Blockchain-Based Digital Identity & Verifiable Credential Wallet is a secure digital platform designed to help users create, manage, store, and share their digital identities and verifiable credentials.
+
+
+
+The system uses blockchain technology to provide trust, transparency, and tamper-resistant verification of credentials issued by trusted organizations such as universities, companies, government institutions, and professional bodies.
+
+
+
+Our vision is simple:
+
+“Own Your Identity. Verify with Trust. Share with Confidence.”
+
+🎯 Problem Statement
+
+Traditional identity and credential systems face several challenges:
+
+
+
+🔹 Dependence on centralized identity databases
+
+🔹 Risk of credential forgery and document tampering
+
+🔹 Difficult and time-consuming manual verification
+
+🔹 Users have limited control over their personal information
+
+🔹 Repeated submission of certificates and identity documents
+
+🔹 Lack of a secure and universal credential management system
+
+🔹 Privacy concerns when sharing sensitive personal information
+
+
+
+This project addresses these challenges through a decentralized identity and credential management system.
+
+💡 Our Solution
+
+The system connects users, credential issuers, and credential verifiers through a trusted digital platform.
+
+
+
+It helps users to:
+
+
+
+✅ Create and manage a digital identity
+
+✅ Store verifiable credentials securely
+
+✅ Receive credentials from authorized issuers
+
+✅ Share credentials with selected organizations
+
+✅ Verify credentials quickly and securely
+
+✅ Detect tampered or invalid credentials
+
+✅ Maintain greater control over personal data
+
+
+
+Blockchain technology provides a tamper-resistant verification layer, while the wallet gives users a convenient way to manage their credentials.
+
+✨ Key Features
+
+👤 Digital Identity Management
+
+Create and manage a decentralized digital identity
+
+Secure identity profile management
+
+Unique identity identifier for each user
+
+User-controlled credential sharing
+
+🎓 Verifiable Credential Wallet
+
+Store digital certificates and credentials
+
+Organize credentials in a single wallet
+
+View credential issuer and verification details
+
+Track issued and shared credentials
+
+⛓️ Blockchain-Based Verification
+
+Store credential verification records on blockchain
+
+Tamper-resistant credential validation
+
+Generate unique credential hashes
+
+Verify whether a credential is authentic and valid
+
+🏢 Issuer Management
+
+Authorized institutions can issue credentials
+
+Digital certificates can be issued directly to users
+
+Issuers can maintain credential records
+
+Credential status can be monitored and updated
+
+🔎 Credential Verification
+
+Organizations can verify credentials instantly
+
+QR code or verification ID based validation
+
+Check credential authenticity without lengthy manual processes
+
+Identify revoked or invalid credentials
+
+🔐 Security & Privacy
+
+Secure authentication and authorization
+
+User-controlled data sharing
+
+Cryptographic protection of credentials
+
+Minimize unnecessary exposure of personal information
+
+📊 Management Dashboard
+
+Monitor issued credentials
+
+View verification activities
+
+Track credential status
+
+Manage users, issuers, and verification requests
+
+Generate verification and activity reports
+
+🔄 How the System Works
+
+1. User Registration → 2. Digital Identity Creation → 3. Credential Issuing → 4. Blockchain Verification → 5. Credential Storage → 6. Secure Credential Sharing → 7. Instant Verification
+
+
+
+The user receives credentials from a trusted issuer and stores them in the digital wallet. When a verifier requests proof, the user can selectively share the required credential. The verifier can then validate its authenticity using the blockchain-backed verification mechanism.
+
+🌍 Real-World Applications
+
+🎓 Educational Certificates – Degree and course certificate verification
+
+💼 Employment Verification – Employee qualifications and experience
+
+🏛️ Government Services – Digital identity and official credentials
+
+🏥 Healthcare – Verified professional and patient credentials
+
+🪪 Digital Identity – Secure identity management
+
+📜 Professional Certifications – Skill and certification verification
+
+🌐 Cross-Organization Verification – Trusted credential exchange
+
+🏗️ System Architecture
+
+           ┌─────────────────────┐
+           │      User           │
+           │ Digital ID & Wallet │
+           └──────────┬──────────┘
+                      │
+                      ▼
+           ┌─────────────────────┐
+           │ Credential Issuer   │
+           │ University / Org.   │
+           └──────────┬──────────┘
+                      │
+                      ▼
+           ┌─────────────────────┐
+           │ Smart Contract /    │
+           │ Blockchain Network   │
+           └──────────┬──────────┘
+                      │
+                      ▼
+           ┌─────────────────────┐
+           │ Credential Verifier │
+           │ Company / Institution│
+           └─────────────────────┘
+
+
+🛡️ Benefits
+
+🔒 Improved identity security
+
+✅ Fast and reliable credential verification
+
+⛓️ Tamper-resistant records
+
+👤 Greater user control over identity
+
+📉 Reduced manual verification effort
+
+🌐 Supports trusted digital credential exchange
+
+🚀 Scalable for multiple institutions and organizations
+
+🚀 Future Enhancements
+
+Integration with Decentralized Identifiers (DIDs)
+
+Mobile application for Android and iOS
+
+Biometric-based identity verification
+
+Multi-blockchain support
+
+AI-assisted fraud and credential detection
+
+Integration with universities, companies, and government systems
+
+Advanced privacy-preserving verification using zero-knowledge proofs
+
+🎯 Project Goal
+
+The main goal of this project is to create a trusted, secure, and user-centric digital identity ecosystem where individuals can own their credentials and organizations can verify them quickly without depending entirely on traditional centralized systems.
+
+“Decentralize Identity. Verify Credentials. Build Digital Trust.”
