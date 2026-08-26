@@ -1,0 +1,51 @@
+<div class="animate-fade-in" style="padding-bottom: 4rem;">
+    <!-- Top Status Bar -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h2 style="margin-bottom: 0.25rem;">Good evening, Holder</h2>
+            <p style="color: var(--color-success); margin: 0; font-size: var(--font-size-sm); display: flex; align-items: center; gap: 0.5rem;">
+                <i class="ph-fill ph-shield-check"></i> Your digital identity is secure.
+            </p>
+        </div>
+        <div class="flex gap-4 text-center">
+            <div style="background: var(--color-surface); padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); text-transform: uppercase;">Credentials</div>
+                <div style="font-weight: 700; color: var(--color-primary);" id="hdr-cred-count">0</div>
+            </div>
+            <div style="background: var(--color-surface); padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); text-transform: uppercase;">Alerts</div>
+                <div style="font-weight: 700; color: var(--color-success);">0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Setup Section (Visible if no wallet exists) -->
+    <div id="wallet-setup-section" class="glass-card text-center" style="display: none; padding: 4rem 2rem; border-top: 4px solid var(--color-warning);">
+        <i class="ph-fill ph-shield-warning" style="font-size: 4rem; color: var(--color-warning); margin-bottom: 1rem;"></i>
+        <h3>Secure Your Identity</h3>
+        <p style="max-width: 500px; margin: 0 auto 2rem;">
+            Before receiving credentials, you must generate your Decentralized Identifier (DID) and secure your local wallet. 
+            Your private keys are encrypted with this password and never leave your device.
+        </p>
+        
+        <div style="max-width: 350px; margin: 0 auto; text-align: left;">
+            <div class="form-group">
+                <label class="form-label" for="new-wallet-pwd">Create Wallet Password</label>
+                <div style="position: relative;">
+                    <i class="ph ph-lock-key" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-muted);"></i>
+                    <input type="password" id="new-wallet-pwd" class="form-control" style="padding-left: 2.5rem;" placeholder="Strong Password" required>
+                </div>
+                <small style="color: var(--color-text-muted); display: block; margin-top: 0.5rem;"><i class="ph ph-warning-circle text-warning"></i> Do not lose this password. It cannot be recovered.</small>
+            </div>
+            <button id="create-wallet-btn" class="btn btn-primary" style="width: 100%;">
+                <i class="ph ph-fingerprint"></i> Generate Local Wallet
+            </button>
+        </div>
+    </div>
+
+    <!-- Wallet Section (Visible when wallet exists) -->
+    <div id="wallet-section" style="display: none;">
+        <!-- Injected by app.js (either Lock Screen or Credentials Grid) -->
+        <div id="wallet-content"></div>
+    </div>
+</div>

@@ -1,0 +1,275 @@
+<style>
+/* Security Center Styles */
+.security-header {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(21, 28, 47, 0.8));
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.security-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.security-stat-val {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: monospace;
+    color: var(--color-success);
+}
+
+.encryption-visualizer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background: rgba(0,0,0,0.2);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+}
+
+.node {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+.node-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+}
+
+.data-flow {
+    flex: 1;
+    height: 2px;
+    background: var(--color-border);
+    position: relative;
+}
+.data-packet {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 10px var(--color-success);
+    display: none;
+}
+
+/* Simulation animations */
+@keyframes sendPacket {
+    0% { left: 0; opacity: 1; }
+    50% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes attackPacket {
+    0% { left: 50%; top: -50px; opacity: 0; background: var(--color-danger); box-shadow: 0 0 10px var(--color-danger); }
+    50% { left: 50%; top: -4px; opacity: 1; }
+    100% { left: 50%; top: -4px; opacity: 0; transform: scale(3); }
+}
+
+.threat-log {
+    background: rgba(0,0,0,0.5);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    font-family: monospace;
+    font-size: var(--font-size-xs);
+    height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.log-entry { opacity: 0.8; }
+.log-entry.info { color: var(--color-text-secondary); }
+.log-entry.success { color: var(--color-success); }
+.log-entry.warning { color: var(--color-warning); }
+.log-entry.danger { color: var(--color-danger); font-weight: bold; }
+</style>
+
+<div class="animate-fade-in" style="padding-bottom: 4rem;">
+    
+    <div class="security-header">
+        <div>
+            <h2 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="ph-fill ph-shield-check text-success"></i> Security & Privacy Center
+            </h2>
+            <p style="color: var(--color-text-secondary); margin: 0;">Your data is encrypted locally. Zero-knowledge architecture active.</p>
+        </div>
+        <div style="display: flex; gap: 2rem;">
+            <div class="security-stat">
+                <span style="font-size: var(--font-size-xs); color: var(--color-text-muted); text-transform: uppercase;">Encryption</span>
+                <span class="security-stat-val">AES-256-GCM</span>
+            </div>
+            <div class="security-stat">
+                <span style="font-size: var(--font-size-xs); color: var(--color-text-muted); text-transform: uppercase;">Keys Generated</span>
+                <span class="security-stat-val text-primary">Local/Ed25519</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        
+        <!-- Left: Visualization & Controls -->
+        <div>
+            <h3 style="margin-bottom: 1rem;">Data Flow Architecture</h3>
+            <div class="encryption-visualizer">
+                <div class="node" style="border-color: var(--color-primary);">
+                    <i class="ph-fill ph-device-mobile text-primary" style="font-size: 2rem;"></i>
+                    <div class="node-label">Local Device (Wallet)</div>
+                </div>
+                
+                <div class="data-flow">
+                    <div class="data-packet" id="sim-packet"></div>
+                    <div class="data-packet" id="attack-packet" style="background: var(--color-danger); box-shadow: 0 0 10px var(--color-danger);"></div>
+                </div>
+
+                <div class="node" style="border-color: var(--color-warning);">
+                    <i class="ph-fill ph-server text-warning" style="font-size: 2rem;"></i>
+                    <div class="node-label">Network/Server</div>
+                </div>
+            </div>
+
+            <div class="glass-card mb-4">
+                <h4 style="margin-bottom: 1rem;">Simulation Controls</h4>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-outline" id="btn-sim-encrypt"><i class="ph ph-lock-key"></i> Simulate Valid Presentation</button>
+                    <button class="btn btn-primary" id="btn-sim-attack" style="background: var(--color-danger); border-color: var(--color-danger);"><i class="ph-bold ph-bug"></i> Run Threat Simulation</button>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h4 style="margin-bottom: 1rem;">Privacy Settings</h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border);">
+                        <div>
+                            <div style="font-weight: 500;">Selective Disclosure Default</div>
+                            <div style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Automatically minimize shared fields during presentation.</div>
+                        </div>
+                        <label style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                            <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--color-success); transition: .4s; border-radius: 34px;">
+                                <span style="position: absolute; content: ''; height: 18px; width: 18px; left: 28px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 500;">Biometric Lock</div>
+                            <div style="font-size: var(--font-size-sm); color: var(--color-text-muted);">Require device biometrics to decrypt local wallet.</div>
+                        </div>
+                        <button class="btn btn-outline" style="padding: 0.2rem 1rem; font-size: var(--font-size-sm);">Enable</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Event Log -->
+        <div>
+            <h3 style="margin-bottom: 1rem;">Security Event Log</h3>
+            <div class="threat-log" id="security-log">
+                <div class="log-entry info">[SYSTEM] Security module initialized.</div>
+                <div class="log-entry info">[SYSTEM] Wallet keys loaded in secure memory enclave.</div>
+                <div class="log-entry success">[OK] AES-GCM Encryption active.</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Logic strictly for the simulation UI on this page
+(function() {
+    const btnSim = document.getElementById('btn-sim-encrypt');
+    const btnAttack = document.getElementById('btn-sim-attack');
+    const packet = document.getElementById('sim-packet');
+    const attackPacket = document.getElementById('attack-packet');
+    const log = document.getElementById('security-log');
+
+    function appendLog(msg, type='info') {
+        const time = new Date().toLocaleTimeString();
+        const div = document.createElement('div');
+        div.className = `log-entry ${type}`;
+        div.textContent = `[${time}] ${msg}`;
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight;
+    }
+
+    if(btnSim) {
+        btnSim.addEventListener('click', () => {
+            btnSim.disabled = true;
+            appendLog('Constructing Zero-Knowledge Proof...', 'info');
+            
+            setTimeout(() => {
+                appendLog('Payload Encrypted (AES-GCM). Initiating transfer.', 'success');
+                packet.style.display = 'block';
+                packet.style.animation = 'sendPacket 2s ease forwards';
+                
+                setTimeout(() => {
+                    packet.style.display = 'none';
+                    packet.style.animation = 'none';
+                    appendLog('Proof verified by network successfully.', 'success');
+                    btnSim.disabled = false;
+                }, 2000);
+            }, 800);
+        });
+    }
+
+    if(btnAttack) {
+        btnAttack.addEventListener('click', () => {
+            btnAttack.disabled = true;
+            btnSim.disabled = true;
+            
+            appendLog('WARNING: Simulating Man-in-the-Middle (MITM) attack...', 'warning');
+            
+            // Standard packet sends
+            packet.style.display = 'block';
+            packet.style.animation = 'sendPacket 2s linear forwards';
+            
+            // Attack packet intercepts halfway
+            setTimeout(() => {
+                attackPacket.style.display = 'block';
+                attackPacket.style.animation = 'attackPacket 1s ease forwards';
+                
+                setTimeout(() => {
+                    // Collision
+                    packet.style.display = 'none'; // stops
+                    appendLog('CRITICAL: Malicious payload modification detected in transit!', 'danger');
+                    
+                    setTimeout(() => {
+                        appendLog('Network node rejected payload. Signature mismatch.', 'success');
+                        appendLog('Attack mitigated. No sensitive data exposed.', 'success');
+                        
+                        attackPacket.style.display = 'none';
+                        attackPacket.style.animation = 'none';
+                        packet.style.animation = 'none';
+                        
+                        btnAttack.disabled = false;
+                        btnSim.disabled = false;
+                    }, 1000);
+                    
+                }, 500); // half way
+                
+            }, 500);
+        });
+    }
+})();
+</script>

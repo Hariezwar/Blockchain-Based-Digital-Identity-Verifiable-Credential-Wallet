@@ -1,0 +1,243 @@
+<style>
+/* Hero section specific styles */
+.hero-section {
+    position: relative;
+    padding: 6rem 0 4rem;
+    overflow: hidden;
+}
+
+.hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, rgba(11,17,33,0) 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+}
+
+.stat-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Visualization flow */
+.flow-diagram {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4rem auto;
+    max-width: 900px;
+    padding: 2rem;
+    background: rgba(21, 28, 47, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 2;
+}
+
+.flow-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: var(--color-text-primary);
+    box-shadow: 0 0 15px rgba(37,99,235,0.3);
+}
+
+.flow-label {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+
+.flow-arrow {
+    color: var(--color-border);
+    font-size: 1.5rem;
+}
+
+/* Status Widget */
+.status-widget {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    width: 250px;
+    box-shadow: var(--shadow-lg);
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: var(--font-size-xs);
+}
+.status-item:last-child { margin-bottom: 0; }
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+    box-shadow: 0 0 8px var(--color-success);
+}
+</style>
+
+<div class="animate-fade-in hero-section">
+    <div class="hero-glow"></div>
+    
+    <div class="text-center">
+        <h1 class="hero-title">
+            Own Your Identity.<br>
+            <span class="text-gradient">Share Only What Matters.</span><br>
+            Verify Instantly.
+        </h1>
+        <p class="hero-subtitle">
+            A premium digital trust platform powered by verifiable credentials and blockchain technology. Secure, private, and instant.
+        </p>
+
+        <div class="flex justify-center gap-4 mt-4">
+            <a href="#/login" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: var(--radius-full);">
+                Create Your Digital Identity <i class="ph-bold ph-arrow-right"></i>
+            </a>
+            <a href="#/login" class="btn btn-outline" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: var(--radius-full);">
+                Verify a Credential
+            </a>
+            <a href="#/dashboard" class="btn btn-outline" style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: var(--radius-full); border-color: var(--color-accent); color: var(--color-accent);">
+                Explore Live Demo
+            </a>
+        </div>
+    </div>
+
+    <!-- Trust Flow Visualization -->
+    <div class="flow-diagram animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="flow-step">
+            <div class="flow-icon"><i class="ph-fill ph-user"></i></div>
+            <span class="flow-label">PERSON</span>
+        </div>
+        <div class="flow-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+        <div class="flow-step">
+            <div class="flow-icon"><i class="ph-fill ph-fingerprint text-accent"></i></div>
+            <span class="flow-label">DIGITAL<br>IDENTITY</span>
+        </div>
+        <div class="flow-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+        <div class="flow-step">
+            <div class="flow-icon"><i class="ph-fill ph-certificate text-primary"></i></div>
+            <span class="flow-label">VERIFIABLE<br>CREDENTIALS</span>
+        </div>
+        <div class="flow-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+        <div class="flow-step">
+            <div class="flow-icon"><i class="ph-fill ph-cube text-warning"></i></div>
+            <span class="flow-label">BLOCKCHAIN<br>TRUST</span>
+        </div>
+        <div class="flow-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+        <div class="flow-step">
+            <div class="flow-icon"><i class="ph-fill ph-check-circle text-success"></i></div>
+            <span class="flow-label">INSTANT<br>VERIFICATION</span>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid animate-fade-in" style="animation-delay: 0.4s;">
+        <div class="stat-card">
+            <div class="stat-number">12,482+</div>
+            <div class="stat-label">Credentials Issued</div>
+            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-top: 0.5rem;">Demo Metric</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">8,936</div>
+            <div class="stat-label">Verified Identities</div>
+            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-top: 0.5rem;">Demo Metric</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1,284</div>
+            <div class="stat-label">Trusted Issuers</div>
+            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-top: 0.5rem;">Demo Metric</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">99.98%</div>
+            <div class="stat-label">Verification Availability</div>
+            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-top: 0.5rem;">System Uptime</div>
+        </div>
+    </div>
+</div>
+
+<!-- Live Trust Status Widget -->
+<div class="status-widget animate-fade-in" style="animation-delay: 0.6s;">
+    <div style="font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-text-secondary); text-transform: uppercase;">
+        Network Status (Demo)
+    </div>
+    <div class="status-item">
+        <span>Identity Network</span>
+        <div class="flex items-center gap-2"><span class="status-dot"></span> Operational</div>
+    </div>
+    <div class="status-item">
+        <span>Verification Service</span>
+        <div class="flex items-center gap-2"><span class="status-dot"></span> Operational</div>
+    </div>
+    <div class="status-item">
+        <span>Credential Registry</span>
+        <div class="flex items-center gap-2"><span class="status-dot"></span> Operational</div>
+    </div>
+</div>

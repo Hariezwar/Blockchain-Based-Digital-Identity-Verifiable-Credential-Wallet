@@ -1,0 +1,141 @@
+<style>
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 150px);
+    gap: 2rem;
+    align-items: center;
+}
+
+.login-visual {
+    position: relative;
+    height: 100%;
+    border-radius: var(--radius-xl);
+    background: radial-gradient(circle at center, rgba(37,99,235,0.2) 0%, transparent 70%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 2rem;
+    text-align: center;
+}
+
+.auth-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.role-tabs {
+    display: flex;
+    background: rgba(0,0,0,0.2);
+    border-radius: var(--radius-full);
+    padding: 0.25rem;
+    margin-bottom: 2rem;
+}
+.role-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    color: var(--color-text-secondary);
+}
+.role-tab.active {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.demo-credentials {
+    background: rgba(37, 99, 235, 0.05);
+    border: 1px solid var(--color-primary-light);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-top: 1.5rem;
+    font-size: var(--font-size-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+</style>
+
+<div class="animate-fade-in login-container">
+    
+    <!-- Left: Auth Form -->
+    <div style="width: 100%;">
+        <div class="auth-card">
+            <h2 style="margin-bottom: 0.5rem; letter-spacing: -0.02em;">Welcome to CredTrust</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">Authenticate to access your digital identity portal.</p>
+            
+            <div class="role-tabs">
+                <div class="role-tab active" onclick="document.getElementById('email').value='holder@demo.com'; document.getElementById('password').value='Demo@123'; this.parentElement.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active')); this.classList.add('active');">Holder</div>
+                <div class="role-tab" onclick="document.getElementById('email').value='issuer@demo.com'; document.getElementById('password').value='Demo@123'; this.parentElement.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active')); this.classList.add('active');">Issuer</div>
+                <div class="role-tab" onclick="document.getElementById('email').value='verifier@demo.com'; document.getElementById('password').value='Demo@123'; this.parentElement.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active')); this.classList.add('active');">Verifier</div>
+            </div>
+
+            <form id="login-form" onsubmit="event.preventDefault(); App.handleLogin();">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <div style="position: relative;">
+                        <i class="ph ph-envelope-simple" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-muted);"></i>
+                        <input type="email" id="email" class="form-control" style="padding-left: 2.5rem; height: 3rem;" placeholder="e.g. holder@demo.com" required value="holder@demo.com">
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="form-label" for="password">Password</label>
+                    <div style="position: relative;">
+                        <i class="ph ph-lock-key" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-muted);"></i>
+                        <input type="password" id="password" class="form-control" style="padding-left: 2.5rem; height: 3rem;" placeholder="••••••••" required value="Demo@123">
+                    </div>
+                </div>
+
+                <div id="login-error" class="badge badge-danger mb-4" style="display: none; width: 100%; justify-content: center; padding: 0.75rem;"></div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.1rem; border-radius: var(--radius-lg); margin-top: 1rem;">
+                    Secure Sign In <i class="ph-bold ph-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="demo-credentials">
+                <div>
+                    <div style="color: var(--color-text-muted); font-size: var(--font-size-xs); text-transform: uppercase; margin-bottom: 0.2rem;">Demo Access</div>
+                    <div style="font-family: monospace; font-weight: 500;">Password: Demo@123</div>
+                </div>
+                <i class="ph-fill ph-info text-primary" style="font-size: 1.5rem;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Visual -->
+    <div class="login-visual">
+        <i class="ph-fill ph-fingerprint text-primary" style="font-size: 8rem; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(37,99,235,0.5));"></i>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Zero-Trust Architecture</h3>
+        <p style="color: var(--color-text-secondary); max-width: 400px; line-height: 1.6;">
+            Your credentials never leave your device. All cryptographic operations happen locally in your browser. 
+            The server only processes zero-knowledge proofs.
+        </p>
+    </div>
+
+</div>

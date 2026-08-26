@@ -1,0 +1,183 @@
+<style>
+/* Admin Dashboard specific styles */
+.admin-stat-card {
+    background: linear-gradient(135deg, rgba(21, 28, 47, 0.8), rgba(37, 99, 235, 0.05));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.admin-stat-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.admin-stat-icon {
+    position: absolute;
+    right: -10px;
+    bottom: -20px;
+    font-size: 6rem;
+    opacity: 0.05;
+    color: var(--color-primary);
+}
+
+.health-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+.health-fill {
+    height: 100%;
+    background: var(--color-success);
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--color-success);
+}
+.health-fill.warning { background: var(--color-warning); box-shadow: 0 0 10px var(--color-warning); }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.admin-table th {
+    text-align: left;
+    padding: 1rem;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+}
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: var(--font-size-sm);
+}
+</style>
+
+<div class="animate-fade-in" style="padding-bottom: 4rem;">
+    <!-- Top Status -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h2 style="margin-bottom: 0.25rem;">Command Center</h2>
+            <p style="color: var(--color-text-secondary); margin: 0; font-size: var(--font-size-sm);">
+                Global network governance and system health overview.
+            </p>
+        </div>
+        <div class="flex gap-4">
+            <div class="badge badge-danger flex items-center gap-2" style="padding: 0.5rem 1rem;">
+                <i class="ph-fill ph-shield-star"></i> Administrator Access
+            </div>
+            <button class="btn btn-outline" style="border-color: var(--color-primary-light);"><i class="ph ph-download-simple"></i> Export Audit Log</button>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem;">
+        <div class="admin-stat-card">
+            <i class="ph-fill ph-users admin-stat-icon"></i>
+            <p style="margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-sm); text-transform: uppercase;">Total Wallets</p>
+            <h3 style="margin: 0.5rem 0 0 0; font-size: 2.5rem;">24,892</h3>
+            <div style="font-size: var(--font-size-xs); color: var(--color-success); margin-top: 0.5rem;"><i class="ph ph-trend-up"></i> +412 this week</div>
+        </div>
+        <div class="admin-stat-card">
+            <i class="ph-fill ph-buildings admin-stat-icon text-success"></i>
+            <p style="margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-sm); text-transform: uppercase;">Verified Issuers</p>
+            <h3 style="margin: 0.5rem 0 0 0; font-size: 2.5rem; color: var(--color-success);">142</h3>
+            <div style="font-size: var(--font-size-xs); color: var(--color-warning); margin-top: 0.5rem;">8 applications pending review</div>
+        </div>
+        <div class="admin-stat-card">
+            <i class="ph-fill ph-certificate admin-stat-icon text-primary"></i>
+            <p style="margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-sm); text-transform: uppercase;">Active Credentials</p>
+            <h3 style="margin: 0.5rem 0 0 0; font-size: 2.5rem; color: var(--color-primary);">148,930</h3>
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 0.5rem;">Total anchored proofs</div>
+        </div>
+        <div class="admin-stat-card" style="border-left: 4px solid var(--color-danger);">
+            <i class="ph-fill ph-warning-circle admin-stat-icon text-danger"></i>
+            <p style="margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-sm); text-transform: uppercase;">Security Alerts</p>
+            <h3 style="margin: 0.5rem 0 0 0; font-size: 2.5rem; color: var(--color-danger);">0</h3>
+            <div style="font-size: var(--font-size-xs); color: var(--color-success); margin-top: 0.5rem;">System operating normally</div>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2.5rem;">
+        
+        <!-- Main Panel: Network Activity -->
+        <div class="glass-card" style="padding: 1.5rem;">
+            <div class="flex justify-between items-center mb-4">
+                <h3 style="margin: 0;">Network Activity (24h)</h3>
+                <div class="badge" style="background: rgba(0,0,0,0.3); font-family: monospace;">Node: us-east-1</div>
+            </div>
+            <div style="height: 300px; width: 100%; margin-bottom: 2rem;">
+                <canvas id="adminActivityChart"></canvas>
+            </div>
+            
+            <h3 style="margin: 1.5rem 0 1rem 0;">Trust Registry Governance</h3>
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Organization</th>
+                            <th>DID / Address</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-org-table-body">
+                        <!-- Dynamic Orgs Injected Here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Side Panel: System Health -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            
+            <div class="glass-card" style="padding: 1.5rem;">
+                <h3 style="margin-bottom: 1.5rem; font-size: var(--font-size-lg);"><i class="ph-bold ph-heartbeat text-success"></i> System Health</h3>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="flex justify-between" style="font-size: var(--font-size-sm); margin-bottom: 0.25rem;">
+                        <span style="color: var(--color-text-secondary);">API Gateway Load</span>
+                        <span>32%</span>
+                    </div>
+                    <div class="health-bar"><div class="health-fill" style="width: 32%;"></div></div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="flex justify-between" style="font-size: var(--font-size-sm); margin-bottom: 0.25rem;">
+                        <span style="color: var(--color-text-secondary);">Blockchain Node Sync</span>
+                        <span>99.9%</span>
+                    </div>
+                    <div class="health-bar"><div class="health-fill" style="width: 99.9%;"></div></div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="flex justify-between" style="font-size: var(--font-size-sm); margin-bottom: 0.25rem;">
+                        <span style="color: var(--color-text-secondary);">Credential Status Registry (Gas)</span>
+                        <span class="text-warning">78%</span>
+                    </div>
+                    <div class="health-bar"><div class="health-fill warning" style="width: 78%;"></div></div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="padding: 1.5rem; border-color: var(--color-primary-light);">
+                <h3 style="margin-bottom: 1rem; font-size: var(--font-size-lg);">Recent Alerts</h3>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-info);">
+                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-bottom: 0.25rem;">10 mins ago</div>
+                        <div style="font-size: var(--font-size-sm);">New issuer application received from Global Tech Institute.</div>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-success);">
+                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-bottom: 0.25rem;">1 hour ago</div>
+                        <div style="font-size: var(--font-size-sm);">Smart contract audit passed automatically. No vulnerabilities found.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+node_modules/
+.env
+coverage/
+.DS_Store
+dist/
+build/
+
+# Hardhat
+artifacts/
+cache/
+typechain-types/
+
+# Database
+db_data/

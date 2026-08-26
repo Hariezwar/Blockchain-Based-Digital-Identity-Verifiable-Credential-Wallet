@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B1121">
+    <meta name="description" content="CredTrust - Blockchain-Based Digital Identity & Verifiable Credential Wallet">
+    <title>CredTrust | Own Your Identity</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <!-- Icons (Phosphor Icons - lightweight, modern) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="glass-card" style="border-radius: 0; padding: 1rem 0; position: sticky; top: 0; z-index: 50; border-left: none; border-right: none; border-top: none;">
+            <div class="container flex justify-between items-center">
+                <a href="/" class="flex items-center gap-2" style="text-decoration: none;">
+                    <i class="ph-fill ph-shield-check" style="font-size: 2rem; color: var(--color-primary);"></i>
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary);">Cred<span class="text-gradient">Trust</span></span>
+                </a>
+                
+                <nav id="main-nav" class="flex gap-4 items-center">
+                    <!-- Navigation dynamically populated by app.js based on auth state -->
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Area (Dynamic Routing) -->
+        <main id="main-content" class="container" style="flex: 1; padding-top: 3rem; padding-bottom: 3rem;">
+            <!-- Loading State -->
+            <div id="loader" class="flex justify-center items-center" style="min-height: 50vh;">
+                <i class="ph ph-spinner-gap" style="font-size: 3rem; color: var(--color-primary); animation: spin 1s linear infinite;"></i>
+                <style>@keyframes spin { 100% { transform: rotate(360deg); } }</style>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer style="padding: 2rem 0; border-top: 1px solid var(--color-border); margin-top: auto;">
+            <div class="container flex justify-between items-center">
+                <p style="margin: 0; font-size: var(--font-size-sm);">&copy; 2026 CredTrust. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <select id="lang-select" class="form-control" style="width: auto; padding: 0.2rem 0.5rem;">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                    </select>
+                    <span id="mode-indicator" class="badge badge-info">Full Mode</span>
+                    <button id="theme-toggle" class="btn btn-outline" style="padding: 0.5rem; border-radius: 50%;">
+                        <i class="ph ph-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Action Button (Quick Actions) -->
+    <div id="quick-actions" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 90; display: none;">
+        <button id="qa-toggle" class="btn btn-primary" style="width: 56px; height: 56px; border-radius: 50%; padding: 0; box-shadow: var(--shadow-lg);">
+            <i class="ph-bold ph-plus" style="font-size: 1.5rem;"></i>
+        </button>
+        <div id="qa-menu" style="position: absolute; bottom: 70px; right: 0; background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 0.5rem; display: none; flex-direction: column; gap: 0.5rem; width: max-content; box-shadow: var(--shadow-lg);">
+            <!-- Populated dynamically based on role -->
+        </div>
+    </div>
+
+    <!-- Command Palette Modal -->
+    <div id="command-palette-overlay" class="modal-overlay">
+        <div class="modal" style="margin-top: -20vh;">
+            <div style="padding: 1rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 1rem;">
+                <i class="ph ph-magnifying-glass" style="font-size: 1.5rem; color: var(--color-text-muted);"></i>
+                <input type="text" id="command-palette-input" placeholder="Search or type a command..." style="width: 100%; background: transparent; border: none; color: var(--color-text-primary); font-size: var(--font-size-lg); outline: none;">
+            </div>
+            <div id="command-palette-results" style="max-height: 300px; overflow-y: auto; padding: 0.5rem;">
+                <!-- Populated dynamically -->
+            </div>
+            <div style="padding: 0.5rem 1rem; border-top: 1px solid var(--color-border); font-size: var(--font-size-xs); color: var(--color-text-muted); display: flex; justify-content: space-between;">
+                <span><kbd style="background: var(--color-surface); padding: 0.1rem 0.3rem; border-radius: 3px;">↑</kbd> <kbd style="background: var(--color-surface); padding: 0.1rem 0.3rem; border-radius: 3px;">↓</kbd> to navigate</span>
+                <span><kbd style="background: var(--color-surface); padding: 0.1rem 0.3rem; border-radius: 3px;">Enter</kbd> to select</span>
+                <span><kbd style="background: var(--color-surface); padding: 0.1rem 0.3rem; border-radius: 3px;">Esc</kbd> to close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals Container -->
+    <div id="modal-container"></div>
+
+    <!-- Scripts -->
+    <!-- Crypto utilities -->
+    <script src="/assets/js/utils/crypto.js" defer></script>
+    <script src="/assets/js/utils/i18n.js" defer></script>
+    <script src="/assets/js/utils/ui.js" defer></script>
+    <!-- Services -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/js/services/WalletService.js" defer></script>
+    <script src="/assets/js/services/AuthService.js" defer></script>
+    <script src="/assets/js/services/IssuerService.js" defer></script>
+    <script src="/assets/js/services/VerificationService.js" defer></script>
+    <!-- App Core -->
+    <script src="/assets/js/app.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
+</body>
+</html>
